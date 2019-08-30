@@ -4,7 +4,7 @@
  * @Author: userzero
  * @Date: 2019-08-09 16:08:59
  * @LastEditors: userzero
- * @LastEditTime: 2019-08-09 18:12:44
+ * @LastEditTime: 2019.08.12 17:42:51
  -->
 <template>
   <header class="p-header">
@@ -12,6 +12,7 @@
       <i
         v-if="leftBtnOptions && leftBtnOptions.iconClass"
         :class="leftBtnOptions.iconClass"
+        @click="leftBtnOptions.onClick"
       ></i>
       <span class="p-header-btn-text">{{ leftBtnOptions.btnText }}</span>
     </button>
@@ -20,6 +21,7 @@
       <i
         v-if="rightBtnOptions && rightBtnOptions.iconClass"
         :class="rightBtnOptions.iconClass"
+        @click="rightBtnOptions.onClick"
       ></i>
       <span class="p-header-btn-text">{{ rightBtnOptions.btnText }}</span>
     </button>
@@ -46,7 +48,8 @@ export default {
       default: function() {
         return {
           iconClass: '',
-          btnText: ''
+          btnText: '',
+          onClick: function() {}
         }
       },
       required: false
@@ -61,7 +64,8 @@ export default {
       default: function() {
         return {
           iconClass: '',
-          btnText: ''
+          btnText: '',
+          onClick: function() {}
         }
       },
       required: false

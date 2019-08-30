@@ -4,7 +4,7 @@
  * @Author: userzero
  * @Date: 2019-07-30 10:36:39
  * @LastEditors: userzero
- * @LastEditTime: 2019-08-09 15:48:26
+ * @LastEditTime: 2019.08.12 14:15:58
  */
 import Vue from 'vue'
 
@@ -44,7 +44,7 @@ import {
   // TimePicker,
   // SegmentPicker,
   Dialog,
-  // ActionSheet,
+  ActionSheet,
   // Drawer,
   // ImagePreview,
   // scroll
@@ -84,7 +84,7 @@ Vue.use(Toast)
 // Vue.use(TimePicker)
 // Vue.use(SegmentPicker)
 Vue.use(Dialog)
-// Vue.use(ActionSheet)
+Vue.use(ActionSheet)
 // Vue.use(Drawer)
 // Vue.use(ImagePreview)
 Vue.use(Scroll)

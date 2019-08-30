@@ -4,10 +4,10 @@
  * @Author: userzero
  * @Date: 2019-07-30 17:07:51
  * @LastEditors: userzero
- * @LastEditTime: 2019-08-09 18:47:02
+ * @LastEditTime: 2019.08.14 14:27:05
  */
 import api from '@/api'
-import { getDateDiff, screenOrientation } from '@/utils/common'
+import { getDateDiff } from '@/utils/common'
 import pageHeader from '@/components/header'
 export default {
   components: {
@@ -39,7 +39,7 @@ export default {
       scrollOptions: {
         scrollbar: true,
         startY: 0,
-        click: true
+        tap: true
       },
       textList: [],
       dynamicBottom: 50
@@ -48,7 +48,6 @@ export default {
   methods: {
     sendMsg() {
       if (this.matterText.length == 0) {
-        console.log(this)
         this.$createDialog({
           type: 'alert',
           title: '温馨提示',
@@ -61,12 +60,30 @@ export default {
         uName: '我',
         uText: this.matterText
       })
-    }
+    },
+    moreHandle() {
+      this.$createActionSheet({
+        title: '更多操作',
+        data: [
+          {
+            content: '问题历史列表',
+            class: 'cube-foo'
+          }
+        ],
+        onSelect: (item, index) => {
+          if (index == 0) {
+            this.$router.push({ path: '/historylist' })
+          }
+        }
+      }).show()
+    },
+    manualBlur() {
+      this.$refs.chatTextarea.$refs.input.blur()
+    },
+    chatTextAreaFocus() {}
   },
   created() {},
-  mounted() {
-    screenOrientation()
-  },
+  mounted() {},
   watch: {},
   computed: {
     formatDate() {

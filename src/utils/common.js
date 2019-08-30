@@ -4,7 +4,7 @@
  * @Author: userzero
  * @Date: 2019-07-29 11:43:59
  * @LastEditors: userzero
- * @LastEditTime: 2019-08-09 18:45:58
+ * @LastEditTime: 2019.08.12 13:58:14
  */
 
 export const findIndex = function(ary, fn) {
@@ -131,18 +131,69 @@ export const formatDateTime = function(fmt, dateTime) {
   }
 }
 export const screenOrientation = function(h, v) {
-  //判断手机横竖屏状态：
-  if (window.orientation == 180 || window.orientation == 0) {
-    // 竖屏状态
-    v()
+  // //判断手机横竖屏状态：
+  var supportOrientation =
+    typeof window.orientation === 'number' &&
+    typeof window.onorientationchange === 'object'
+
+  var htmlNode = document.body.parentNode,
+    orientation
+
+  var updateOrientation = function() {
+    if (supportOrientation) {
+      orientation = window.orientation
+
+      switch (orientation) {
+        case 0:
+          // 竖屏状态
+          orientation = 'portrait'
+          v()
+          break
+        case 180:
+          // 竖屏状态
+          orientation = 'portrait'
+          v()
+          break
+        case 90:
+          // 横屏状态
+          orientation = 'landscape'
+          h()
+          break
+        case -90:
+          // 横屏状态
+          orientation = 'landscape'
+          h()
+          break
+        default:
+          // 默认竖屏状态
+          orientation = 'portrait'
+          v()
+          break
+      }
+    } else {
+      orientation =
+        window.innerWidth > window.innerHeight ? 'landscape' : 'portrait'
+      if (window.innerWidth > window.innerHeight) {
+        h()
+      } else {
+        v()
+      }
+    }
+
+    htmlNode.setAttribute('class', orientation)
+    if (orientation == 'landscape') {
+      return true
+    } else if (orientation == 'portrait') {
+      return false
+    }
   }
-  if (window.orientation == 90 || window.orientation == -90) {
-    // 横屏状态
-    h()
+
+  if (supportOrientation) {
+    window.addEventListener('orientationchange', updateOrientation, false)
+  } else {
+    //监听resize事件
+    window.addEventListener('resize', updateOrientation, false)
   }
-  window.addEventListener(
-    'onorientationchange' in window ? 'orientationchange' : 'resize',
-    screenOrientation,
-    false
-  )
+
+  updateOrientation()
 }

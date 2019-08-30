@@ -4,7 +4,7 @@
  * @Author: userzero
  * @Date: 2019-07-29 15:17:41
  * @LastEditors: userzero
- * @LastEditTime: 2019-07-31 10:25:45
+ * @LastEditTime: 2019.08.14 11:41:22
  */
 /**
  * meta 可配置参数
@@ -25,6 +25,16 @@ export default [
       icon: '',
       keepAlive: true,
       title: 'home'
+    }
+  },
+  {
+    path: '/historylist',
+    name: 'historylist',
+    component: () => import('@/views/historylist/historylist.vue'),
+    meta: {
+      icon: '',
+      keepAlive: true,
+      title: 'historylist'
     }
   }
 ]
